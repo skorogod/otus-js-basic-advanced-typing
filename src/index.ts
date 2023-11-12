@@ -9,9 +9,8 @@
 // Нужно заменить FIXME на тип который вычисляется на освове OrderState
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-import * as React from "react";
 
-type stateType = Array<OrderState>;
+import * as React from "react";
 
 const orderStates = [
   "initial",
@@ -22,6 +21,8 @@ const orderStates = [
 ] as const;
 
 type OrderState = (typeof orderStates)[number];
+
+type stateType = Array<OrderState>;
 
 export const getUserOrderStates = (orderStates: OrderState[]): stateType => {
   const filteredStates = [] as stateType;
@@ -38,8 +39,6 @@ export const getUserOrderStates = (orderStates: OrderState[]): stateType => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 // type FIXME = any;
-
-type orderType = Order["state"];
 
 type Order =
   | {
@@ -72,6 +71,8 @@ type Order =
       produceEstimate: Date;
       fullfillmentDate: Date;
     };
+
+type orderType = Order["state"];
 
 export const getOrderState = (order: Order): orderType => order.state;
 
@@ -134,7 +135,7 @@ type Order2 =
     };
 
 export const filterOnlyInitialAndInWorkOrder = (
-  order: Order,
+  order: Order2,
 ): initialAndWorkerType | null => {
   if (order.state === "initial" || order.state === "inWork") {
     return order;

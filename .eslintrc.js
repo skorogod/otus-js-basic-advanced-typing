@@ -11,5 +11,7 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint"],
   parser: "@typescript-eslint/parser",
-  rules: {},
+  rules: {
+    "no-shadow": "off",
+  },
 };
