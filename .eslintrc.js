@@ -3,22 +3,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb-base', 'eslint-config-prettier', "plugin:@typescript-eslint/recommended"],
-  plugins: ['@typescript-eslint'],
+  extends: ["prettier"],
   parser: "@typescript-eslint/parser",
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-  ],
+  plugins: ["jest", "@typescript-eslint"],
   rules: {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-types": "off",
+    "no-promise-executor-return": "off",
+    "no-plusplus": "off",
   },
 };
