@@ -63,10 +63,12 @@ describe("CalendarClass", () => {
 
     await calendar.updateTask(
       taskId,
-      new Date("2023-11-12"),
-      "learn english",
-      ["languages"],
-      "active",
+      {
+        date: new Date("2023-11-12"),
+        text: "learn english",
+        tags: ["languages"],
+        status: "active",
+      }
     );
 
     task = await calendar.readTask(taskId);
@@ -102,7 +104,6 @@ describe("CalendarClass", () => {
 
     //filter by text
     filteredTasks = await calendar.filterTasks({
-      tasksArray: tasks,
       text: "english",
     });
 
@@ -111,7 +112,6 @@ describe("CalendarClass", () => {
 
     //filter by date
     filteredTasks = await calendar.filterTasks({
-      tasksArray: tasks,
       date: new Date("2023-11-10"),
     });
 
@@ -120,7 +120,6 @@ describe("CalendarClass", () => {
 
     //filter by tags
     filteredTasks = await calendar.filterTasks({
-      tasksArray: tasks,
       tags: ["fitness"],
     });
 
@@ -130,16 +129,17 @@ describe("CalendarClass", () => {
     //filter by status
     await calendar.updateTask(
       task1,
-      new Date("2023-11-10"),
-      "doing js exercise",
-      ["programming", "js"],
-      "done",
+      {
+        date: new Date("2023-11-10"),
+        text: "doing js exercise",
+        tags: ["programming", "js"],
+        status: "done",
+      }
     );
 
     tasks = await calendar.getTasksArray();
     console.log(tasks);
     filteredTasks = await calendar.filterTasks({
-      tasksArray: tasks,
       status: "done",
     });
 

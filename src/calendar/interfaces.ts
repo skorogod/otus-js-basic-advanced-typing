@@ -21,21 +21,17 @@ export interface ICalendar {
 
   updateTask: (
     taskId: ITask["id"],
-    date: ITask["date"],
-    text: ITask["text"],
-    tags: string[],
-    status: ITask["status"],
+    newTaskData: Omit<ITask, "id">,
   ) => Promise<Task | null>;
 
   deleteTask: (taskId: ITask["id"]) => Promise<ITask["id"] | null>;
 
-  filterTasks: (options: Options) => Promise<ITask[]>;
+  filterTasks: (filterOptions: filterOptions) => Promise<ITask[]>;
 
   getTasksArray: () => Promise<ITask[] | null>;
 
   getTaskById: (taskId: number) => Promise<ITask | null>;
 }
 
-export interface Options extends Partial<Exclude<ITask, "id">> {
-  tasksArray: ITask[];
-}
+export type filterOptions =  Partial<Omit<ITask, "id">>;
+export type newTaskData = Omit<ITask, "id">;

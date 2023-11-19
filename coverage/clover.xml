@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700419563478" clover="3.2.0">
-  <project timestamp="1700419563478" name="All files">
+<coverage generated="1700420095554" clover="3.2.0">
+  <project timestamp="1700420095554" name="All files">
     <metrics statements="92" coveredstatements="86" conditionals="34" coveredconditionals="24" methods="23" coveredmethods="23" elements="149" coveredelements="133" complexity="0" loc="92" ncloc="92" packages="1" files="2" classes="2"/>
     <file name="CalendarClass.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript-Basic\otus-js-basic-advanced-typing\src\calendar\CalendarClass.ts">
       <metrics statements="86" coveredstatements="80" conditionals="34" coveredconditionals="24" methods="22" coveredmethods="22"/>

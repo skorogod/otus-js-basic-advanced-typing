@@ -1,4 +1,4 @@
-import { ICalendar, ITask, Options } from "./interfaces";
+import { ICalendar, ITask, filterOptions, newTaskData } from "./interfaces";
 import { Task } from "./TaskClass";
 
 export class Calendar implements ICalendar {
@@ -104,10 +104,7 @@ export class Calendar implements ICalendar {
 
   async updateTask(
     taskId: number,
-    date: Date,
-    text: string,
-    tags: string[],
-    status: string,
+    newTaskData: newTaskData
   ): Promise<ITask | null> {
     return new Promise(async (resolve, reject) => {
       let tasksArray = await this.getTasksArray();
@@ -116,10 +113,10 @@ export class Calendar implements ICalendar {
         let task: ITask | null = await this.getTaskById(taskId, tasksArray);
 
         if (task) {
-          task.text = text;
-          task.date = date;
-          task.tags = tags;
-          task.status = status;
+          task.text = newTaskData.text;
+          task.date = newTaskData.date;
+          task.tags = newTaskData.tags;
+          task.status = newTaskData.status;
 
           localStorage.setItem("tasks", JSON.stringify(tasksArray));
 
@@ -154,23 +151,20 @@ export class Calendar implements ICalendar {
     });
   }
 
-  async filterTasks(options: Options): Promise<ITask[]> {
-    let tasksArray = options.tasksArray;
-    const date = options.date;
-    const text = options.text;
-    const tags = options.tags;
-    const status = options.status;
+  async filterTasks(filterOptions: filterOptions): Promise<ITask[]> {
+    const {date, text, tags, status} = filterOptions
 
     return new Promise(async (resolve, reject) => {
+      let tasksArray = await this.getTasksArray()
       if (tasksArray.length === 0) {
         reject("Tasks array is empty");
       }
 
       try {
-        if (options.date !== undefined) {
+        if (date !== undefined) {
           tasksArray = tasksArray.filter((task) => {
             console.log(`FILTER ${typeof task.date}`);
-            return task.date.getTime() === options.date?.getTime();
+            return task.date.getTime() === date?.getTime();
           });
         }
 
