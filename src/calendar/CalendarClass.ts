@@ -1,6 +1,4 @@
 import { ICalendar, ITask, Options } from "./interfaces";
-import { getTaskById } from "./getTaskById";
-import { getTasksArray } from "./getTasksArray";
 import { Task } from "./TaskClass";
 
 
@@ -9,12 +7,55 @@ export class Calendar implements ICalendar {
 
     constructor(name: string) {
         this.name = name;
+    };
+
+    async getTasksArray(): Promise<ITask[]> {
+        return new Promise((resolve, reject) => {
+            let tasksArray: Array<Task>;
+            let tasks = localStorage.getItem("tasks");
+        
+            if (tasks && typeof tasks === "string") {
+                tasksArray = JSON.parse(tasks);
+                
+                tasksArray = tasksArray.map(task => {
+                    return new Task(task.id, task.text, new Date(task.date), task.status, task.tags);
+                })
+            }
+        
+            else {
+                tasksArray = [];
+            };
+    
+            resolve(tasksArray)
+        })
+    }
+
+    async getTaskById(taskId: number, tasksArray?: ITask[]): Promise<ITask | null> {
+        return new Promise(async (resolve, reject) => {
+            if (!tasksArray) {
+                tasksArray = await this.getTasksArray();
+            }
+            
+            if (tasksArray) {
+                tasksArray.forEach(task => {
+                    if (task.id === taskId) {
+                        resolve(task);
+                    }
+                })
+
+                reject("Task not found")
+            }
+
+            else {
+                reject("TasksArray not found")
+            } 
+        })
     }
 
     createTask: (date: Date, text: string, tags: Task["tags"]) => Promise<number> = async (date, text, tags) => {
         return new Promise(async (resolve, reject) => {
             try {
-                let tasksArray = await getTasksArray();
+                let tasksArray = await this.getTasksArray();
         
                 let task: Task = new Task(tasksArray.length, text, date, "active", tags);
         
@@ -33,7 +74,7 @@ export class Calendar implements ICalendar {
     
     async readTask(taskId: number): Promise<ITask | null> {
         return new Promise(async (resolve, reject) => {
-            let tasksArray = await getTasksArray();
+            let tasksArray = await this.getTasksArray();
     
             if (tasksArray) {
                 tasksArray.forEach(task => {
@@ -50,16 +91,17 @@ export class Calendar implements ICalendar {
         })
     }
 
-    async updateTask(taskId: number, text: string, date: Date, status: string): Promise<ITask | null> {
+    async updateTask(taskId: number, date: Date, text: string, tags: string[], status: string): Promise<ITask | null> {
         return new Promise(async (resolve, reject) => {
-            let tasksArray = await getTasksArray();
+            let tasksArray = await this.getTasksArray();
 
             if (tasksArray) {
-                let task: ITask | null = await getTaskById(taskId, tasksArray);
+                let task: ITask | null = await this.getTaskById(taskId, tasksArray);
         
                 if (task) {
                     task.text = text;
                     task.date = date;
+                    task.tags = tags;
                     task.status = status
         
                     localStorage.setItem("tasks", JSON.stringify(tasksArray));
@@ -76,10 +118,10 @@ export class Calendar implements ICalendar {
 
     async deleteTask(taskId: number): Promise<number | null> {
         return new Promise(async (resolve, reject) => {
-            let tasksArray: ITask[] = await getTasksArray();
+            let tasksArray: ITask[] = await this.getTasksArray();
     
             if (tasksArray) {
-                const task: ITask | null = await getTaskById(taskId, tasksArray);
+                const task: ITask | null = await this.getTaskById(taskId, tasksArray);
     
                 if (task) {
                     tasksArray.splice(tasksArray.indexOf(task), 1);
@@ -123,11 +165,13 @@ export class Calendar implements ICalendar {
 
                 if (tags) {
                     tasksArray = tasksArray.filter(task => {
-                        tags.forEach(tag => {
+                        console.log(task.tags);
+                        
+                        for (let tag of tags) {
                             if (task.tags.includes(tag)) {
                                 return true;
                             }
-                        })
+                        }
                         return false;
                     })
                 }

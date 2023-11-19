@@ -16,12 +16,16 @@ export interface ICalendar {
 
     readTask: (taskId: ITask["id"]) => Promise<ITask | null>;
 
-    updateTask: (taskId: ITask["id"], text: ITask["text"], 
-                    date: ITask["date"], status: ITask['status']) => Promise<Task | null>;
+    updateTask: (taskId: ITask["id"], date: ITask["date"], text: ITask["text"], 
+                    tags: string[], status: ITask['status']) => Promise<Task | null>;
 
     deleteTask: (taskId: ITask["id"]) => Promise<ITask["id"] | null>;
 
     filterTasks: (options: Options) => Promise<ITask[]>;
+
+    getTasksArray: () => Promise<ITask[] | null>;
+
+    getTaskById: (taskId: number) => Promise<ITask | null> 
 }
 
 export interface Options extends Partial<Exclude<ITask, "id">> {
