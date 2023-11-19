@@ -1,16 +1,14 @@
-import {Calendar} from './calendar'
+import { Calendar } from "./calendar/CalendarClass"
 
-import {getTasksArray} from './calendar'
+import {getTasksArray} from './calendar/getTasksArray'
 
 const calendar = new Calendar("My calendar");
 
 (async () => {
-    const tadskID = await calendar.createTask(new Date('2023-11-18'), "Shop", ["Shop"]);
+    //const tadskID = await calendar.createTask(new Date('2023-11-18'), "Shop", ["Shop"]);
     let tasksArray = await getTasksArray();
-    console.log(tasksArray)
-    
 
-    tasksArray = await calendar.filterTasks({tasksArray: tasksArray, date: new Date("2023-11-18")})
+    tasksArray = await calendar.filterTasks({tasksArray: tasksArray, date: new Date("2023-11-17")})
     console.log(tasksArray);
 
 })()
