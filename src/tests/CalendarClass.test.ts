@@ -61,15 +61,12 @@ describe("CalendarClass", () => {
     expect(task?.date).toStrictEqual(new Date("2023-11-10"));
     expect(task?.status).toBe("active");
 
-    await calendar.updateTask(
-      taskId,
-      {
-        date: new Date("2023-11-12"),
-        text: "learn english",
-        tags: ["languages"],
-        status: "active",
-      }
-    );
+    await calendar.updateTask(taskId, {
+      date: new Date("2023-11-12"),
+      text: "learn english",
+      tags: ["languages"],
+      status: "active",
+    });
 
     task = await calendar.readTask(taskId);
 
@@ -127,15 +124,12 @@ describe("CalendarClass", () => {
     expect(filteredTasks[0].id).toBe(task3);
 
     //filter by status
-    await calendar.updateTask(
-      task1,
-      {
-        date: new Date("2023-11-10"),
-        text: "doing js exercise",
-        tags: ["programming", "js"],
-        status: "done",
-      }
-    );
+    await calendar.updateTask(task1, {
+      date: new Date("2023-11-10"),
+      text: "doing js exercise",
+      tags: ["programming", "js"],
+      status: "done",
+    });
 
     tasks = await calendar.getTasksArray();
     console.log(tasks);

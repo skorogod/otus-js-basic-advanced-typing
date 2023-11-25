@@ -33,5 +33,5 @@ export interface ICalendar {
   getTaskById: (taskId: number) => Promise<ITask | null>;
 }
 
-export type filterOptions =  Partial<Omit<ITask, "id">>;
+export type filterOptions = Partial<Omit<ITask, "id">>;
 export type newTaskData = Omit<ITask, "id">;

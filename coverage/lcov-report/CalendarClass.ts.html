@@ -20,9 +20,9 @@
         <h1><a href="index.html">All files</a> CalendarClass.ts</h1>
         <div class="clearfix">
           <div class="fl pad1y space-right2">
-            <span class="strong">93.02% </span>
+            <span class="strong">92.77% </span>
             <span class="quiet">Statements</span>
-            <span class="fraction">80/86</span>
+            <span class="fraction">77/83</span>
           </div>
 
           <div class="fl pad1y space-right2">
@@ -38,9 +38,9 @@
           </div>
 
           <div class="fl pad1y space-right2">
-            <span class="strong">93.02% </span>
+            <span class="strong">92.77% </span>
             <span class="quiet">Lines</span>
-            <span class="fraction">80/86</span>
+            <span class="fraction">77/83</span>
           </div>
         </div>
         <p class="quiet">
@@ -258,13 +258,7 @@
 <a name='L200'></a><a href='#L200'>200</a>
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a>
-<a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L203'></a><a href='#L203'>203</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,15 +269,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">29x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -295,7 +289,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -372,9 +366,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -422,11 +413,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -472,7 +460,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ICalendar, ITask, Options } from "./interfaces";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ICalendar, ITask, filterOptions, newTaskData } from "./interfaces";
 import { Task } from "./TaskClass";
 &nbsp;
 export class Calendar implements ICalendar {
@@ -578,10 +566,7 @@ export class Calendar implements ICalendar {
 &nbsp;
   async updateTask(
     taskId: number,
-    date: Date,
-    text: string,
-    tags: string[],
-    status: string,
+    newTaskData: newTaskData,
   ): Promise&lt;ITask | null&gt; {
     return new Promise(async (resolve, reject) =&gt; {
       let tasksArray = await this.getTasksArray();
@@ -590,10 +575,10 @@ export class Calendar implements ICalendar {
         let task: ITask | null = await this.getTaskById(taskId, tasksArray);
 &nbsp;
         <span class="missing-if-branch" title="else path not taken" >E</span>if (task) {
-          task.text = text;
-          task.date = date;
-          task.tags = tags;
-          task.status = status;
+          task.text = newTaskData.text;
+          task.date = newTaskData.date;
+          task.tags = newTaskData.tags;
+          task.status = newTaskData.status;
 &nbsp;
           localStorage.setItem("tasks", JSON.stringify(tasksArray));
 &nbsp;
@@ -628,23 +613,20 @@ export class Calendar implements ICalendar {
     });
   }
 &nbsp;
-  async filterTasks(options: Options): Promise&lt;ITask[]&gt; {
-    let tasksArray = options.tasksArray;
-    const date = options.date;
-    const text = options.text;
-    const tags = options.tags;
-    const status = options.status;
+  async filterTasks(filterOptions: filterOptions): Promise&lt;ITask[]&gt; {
+    const { date, text, tags, status } = filterOptions;
 &nbsp;
     return new Promise(async (resolve, reject) =&gt; {
+      let tasksArray = await this.getTasksArray();
       <span class="missing-if-branch" title="if path not taken" >I</span>if (tasksArray.length === 0) {
 <span class="cstat-no" title="statement not covered" >        reject("Tasks array is empty");</span>
       }
 &nbsp;
       try {
-        if (options.date !== undefined) {
+        if (date !== undefined) {
           tasksArray = tasksArray.filter((task) =&gt; {
             console.log(`FILTER ${typeof task.date}`);
-            return task.date.getTime() === options.date?.getTime();
+            return task.date.getTime() === date?.getTime();
           });
         }
 &nbsp;
@@ -694,7 +676,7 @@ export class Calendar implements ICalendar {
         rel="noopener noreferrer"
         >istanbul</a
       >
-      at 2023-11-19T18:54:55.517Z
+      at 2023-11-25T22:22:26.674Z
     </div>
     <script src="prettify.js"></script>
     <script>

@@ -104,7 +104,7 @@ export class Calendar implements ICalendar {
 
   async updateTask(
     taskId: number,
-    newTaskData: newTaskData
+    newTaskData: newTaskData,
   ): Promise<ITask | null> {
     return new Promise(async (resolve, reject) => {
       let tasksArray = await this.getTasksArray();
@@ -152,10 +152,10 @@ export class Calendar implements ICalendar {
   }
 
   async filterTasks(filterOptions: filterOptions): Promise<ITask[]> {
-    const {date, text, tags, status} = filterOptions
+    const { date, text, tags, status } = filterOptions;
 
     return new Promise(async (resolve, reject) => {
-      let tasksArray = await this.getTasksArray()
+      let tasksArray = await this.getTasksArray();
       if (tasksArray.length === 0) {
         reject("Tasks array is empty");
       }
